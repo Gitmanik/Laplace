@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -9,16 +10,16 @@ public class EditorManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField Input;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
 
-        Input.onValueChanged.AddListener(OnInput);
+        Input.onSubmit.AddListener(OnInput);
     }
 
     private void OnInput(string arg0)
     {
-        MatrixGenerator.Instance.Edited(arg0);
+        MatrixGenerator.Instance.EditSubmitted(arg0);
     }
 
     public void StartEdit(string currentInput)
