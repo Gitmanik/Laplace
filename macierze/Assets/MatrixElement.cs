@@ -1,24 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class MatrixElement : MonoBehaviour
+public class MatrixElement : MonoBehaviour, IPointerDownHandler
 {
-    public TMP_Text Text;
-    private Vector2Int pos;
+    private Color baseColor;
+    [SerializeField] private Color editingColor;
+    [SerializeField] private Image image;
+    [SerializeField] private TMP_Text Text;
+
     private MatrixGenerator parent;
+    private Vector2Int pos;
+
+    public void OnPointerDown(PointerEventData pointerEventData)
+    {
+        Debug.Log($"Clicked {pos}");
+        parent.Interacted(this);
+    }
+
+    public void SetEditingMode(bool editingMode)
+    {
+        image.color = editingMode ? editingColor : baseColor;
+    }
+
+    public void UpdateElement(string newText)
+    {
+        Text.text = newText;
+    }
+
+    internal string GetValue() => Text.text;
 
     internal void Setup(MatrixGenerator matrixGenerator, Vector2Int pos)
     {
+        baseColor = image.color;
         parent = matrixGenerator;
         this.pos = pos;
-        Text.text = matrixGenerator.GetFor(pos).ToString();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
+        UpdateElement(matrixGenerator.GetFor(pos).ToString());
     }
 }
