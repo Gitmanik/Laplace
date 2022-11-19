@@ -79,7 +79,7 @@ public class MatrixGenerator : MonoBehaviour
         //
 
         //Uzupe³nianie jednego skrajnego miejsca liczb¹
-        if (UnityEngine.Random.Range(0, 1) == 1)
+        if (UnityEngine.Random.Range(0, 2) == 1)
         {
             if (alterCols)
                 SetAt(new Vector2Int(zero - 1, 0), UnityEngine.Random.Range(-10, 10));
@@ -114,7 +114,7 @@ public class MatrixGenerator : MonoBehaviour
             }
 
             string z;
-            if (UnityEngine.Random.Range(0, 1) == 1) //cols
+            if (UnityEngine.Random.Range(0, 2) == 1) //cols
             {
                 z = $"K{zero}{(UnityEngine.Random.Range(0, 1) == 1 ? "+" : "-")}{m1}K{x2}";
                 zadanie = $"K{zero}{(UnityEngine.Random.Range(0, 1) == 1 ? "-" : "+")}{m1}K{x2}";
